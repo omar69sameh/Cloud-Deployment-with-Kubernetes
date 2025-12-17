@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-12-17T14:20:49Z"
+  labels:
+    app: recidivism-api
+  name: recidivism-api
+  namespace: default
+  resourceVersion: "471"
+  uid: 500873c6-1ed5-4fb1-8cf3-e3cb7028b743
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.97.131.99
+  clusterIPs:
+  - 10.97.131.99
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 32064
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: recidivism-api
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

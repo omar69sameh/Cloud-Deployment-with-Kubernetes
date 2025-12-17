@@ -1,0 +1,40 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  creationTimestamp: "2025-12-17T14:25:35Z"
+  name: recidivism-api
+  namespace: default
+  resourceVersion: "875"
+  uid: 5d53709e-1dcd-48a3-8789-3ade09c4ca5d
+spec:
+  maxReplicas: 5
+  metrics:
+  - resource:
+      name: cpu
+      target:
+        averageUtilization: 50
+        type: Utilization
+    type: Resource
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: recidivism-api
+status:
+  conditions:
+  - lastTransitionTime: "2025-12-17T14:25:50Z"
+    message: the HPA controller was able to get the target's current scale
+    reason: SucceededGetScale
+    status: "True"
+    type: AbleToScale
+  - lastTransitionTime: "2025-12-17T14:25:50Z"
+    message: 'the HPA was unable to compute the replica count: failed to get cpu utilization:
+      unable to get metrics for resource cpu: no metrics returned from resource metrics
+      API'
+    reason: FailedGetResourceMetric
+    status: "False"
+    type: ScalingActive
+  currentMetrics:
+  - type: ""
+  currentReplicas: 1
+  desiredReplicas: 0
